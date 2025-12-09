@@ -1,38 +1,12 @@
-import { useEffect, useState } from "react"
-import { supabase } from "./lib/supabase"
-import Login from "./pages/Login"
-import Admin from "./pages/Admin"
+import { Routes, Route } from "react-router-dom";
+import Admin from "./Admin.jsx";
+import Login from "./Login.jsx";
 
 export default function App() {
-  const [session, setSession] = useState(null)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    // session initiale
-    supabase.auth.getSession().then(({ data }) => {
-      setSession(data.session)
-      setLoading(false)
-    })
-
-    // écouter les changements de connexion
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-
-    return () => subscription.unsubscribe()
-  }, [])
-
-  if (loading) {
-    return <div>Chargement…</div>
-  }
-
-  // PAS connecté → page login
-  if (!session) {
-    return <Login />
-  }
-
-  // Connecté → admin / app
-  return <Admin />
+  return (
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/admin" element={<Admin />} />
+    </Routes>
+  );
 }
