@@ -1,76 +1,94 @@
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-
-const COMMON_PASSWORD = "emp2025";
-const ADMIN_EMAIL = "admin@emp.fr";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const handleLogin = () => {
     setError("");
 
-    if (!email) {
-      setError("Adresse email obligatoire");
-      return;
-    }
+    // 🔐 ADMIN
+    if (
+      firstname === "aeh" &&
+      lastname === "admin" &&
+      password === "Avenirenheritage17"
+    ) {
+      localStorage.setItem("empAuth", "true");
+      localStorage.setItem("empAdmin", "true");
+      localStorage.setItem("firstname", firstname);
+      localStorage.setItem("lastname", lastname);
 
-    if (password !== COMMON_PASSWORD) {
-      setError("Mot de passe incorrect");
-      return;
-    }
-
-    localStorage.setItem("userEmail", email);
-
-    if (email === ADMIN_EMAIL) {
       navigate("/admin");
-    } else {
-      navigate("/dashboard");
+      return;
     }
+
+    // 👤 USER
+    if (password === "emp2025" && firstname && lastname) {
+      localStorage.setItem("empAuth", "true");
+      localStorage.removeItem("empAdmin");
+      localStorage.setItem("firstname", firstname);
+      localStorage.setItem("lastname", lastname);
+
+      navigate("/dashboard");
+      return;
+    }
+
+    setError("Identifiants incorrects");
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="bg-background/90 backdrop-blur-xl p-10 rounded-3xl shadow-2xl w-full max-w-md border border-primaryLight">
-        
-        <h1 className="text-4xl font-bold text-primary text-center mb-2">
-          Empreinte Carbone
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="bg-background/90 backdrop-blur-xl p-8 rounded-3xl shadow-xl w-full max-w-md">
+        <h1 className="text-3xl font-bold text-primary mb-6 text-center">
+          Connexion EMP Carbone
         </h1>
-        <p className="text-center text-sm text-textDark/70 mb-8">
-          Mesurer l’impact numérique
-        </p>
 
         <input
-          type="email"
-          placeholder="Adresse email"
-          className="w-full bg-white/60 border border-primaryLight p-3 rounded-xl mb-4 focus:ring-2 focus:ring-primary outline-none"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          type="text"
+          placeholder="Prenom"
+          className="w-full mb-3 p-3 rounded-xl border"
+          value={firstname}
+          onChange={(e) => setFirstname(e.target.value)}
+        />
+
+        <input
+          type="text"
+          placeholder="Nom"
+          className="w-full mb-3 p-3 rounded-xl border"
+          value={lastname}
+          onChange={(e) => setLastname(e.target.value)}
         />
 
         <input
           type="password"
           placeholder="Mot de passe"
-          className="w-full bg-white/60 border border-primaryLight p-3 rounded-xl mb-6 focus:ring-2 focus:ring-primary outline-none"
+          className="w-full mb-4 p-3 rounded-xl border"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
 
+        {error && (
+          <p className="text-red-600 text-sm mb-3 text-center">
+            {error}
+          </p>
+        )}
+
         <button
           onClick={handleLogin}
-          className="w-full bg-primary text-white py-3 rounded-2xl font-semibold hover:bg-primary/90 transition"
+          className="w-full bg-primary text-white py-3 rounded-xl font-semibold"
         >
           Se connecter
         </button>
 
-        {error && (
-          <p className="text-red-600 text-sm text-center mt-4">
-            {error}
-          </p>
-        )}
+        <p className="mt-4 text-xs text-gray-600 text-center italic">
+          Les resultats presentes sont des estimations basees sur des moyennes
+          issues de l ADEME, de simulateurs grand public et de projets scolaires.
+        </p>
       </div>
     </div>
   );

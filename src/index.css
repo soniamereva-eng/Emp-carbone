@@ -6,3 +6,51 @@ body {
   @apply bg-background text-textDark;
   font-family: 'Inter', system-ui, sans-serif;
 }
+
+@keyframes floatSlow {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(40px, -30px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes floatSlower {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-30px, 40px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes floatSlowest {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(20px, 20px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 30s ease-in-out infinite;
+}
+
+.animate-float-slower {
+  animation: floatSlower 45s ease-in-out infinite;
+}
+
+.animate-float-slowest {
+  animation: floatSlowest 60s ease-in-out infinite;
+}
