@@ -87,7 +87,7 @@ export default function Login() {
 
         <p className="mt-4 text-xs text-gray-600 text-center italic">
           Les resultats presents sont des estimations basees sur des moyennes
-          issues de l ADEME, de simulateurs grand public et de projets scolaires.
+          issues de l ADEME ainsi que des données compilées par TaCa et Avenir climatique.
         </p>
       </div>
     </div>
