@@ -14,8 +14,7 @@ export default function DidYouKnow() {
 
       <p className="mt-3 text-xs text-gray-600 italic">
         Les resultats presentes sont des estimations basees sur des
-        moyennes issues de l ADEME, de simulateurs grand public et de
-        projets scolaires.
+        moyennes issues de l ADEME ainsi que des données compilées par TaCa et Avenir climatique.
       </p>
     </div>
   );
