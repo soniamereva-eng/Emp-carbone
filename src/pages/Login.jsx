@@ -45,7 +45,7 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center">
       <div className="bg-background/90 backdrop-blur-xl p-8 rounded-3xl shadow-xl w-full max-w-md">
         <h1 className="text-3xl font-bold text-primary mb-6 text-center">
-          Connexion EMP Carbone
+          Connectez-vous !
         </h1>
 
         <input
@@ -86,7 +86,7 @@ export default function Login() {
         </button>
 
         <p className="mt-4 text-xs text-gray-600 text-center italic">
-          Les resultats presentes sont des estimations basees sur des moyennes
+          Les resultats presents sont des estimations basees sur des moyennes
           issues de l ADEME, de simulateurs grand public et de projets scolaires.
         </p>
       </div>
